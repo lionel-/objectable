@@ -154,11 +154,9 @@ SEXP new_object_table(SEXP x) {
   SEXP env = PROTECT(bare_environment(R_EmptyEnv));
   SET_HASHTAB(env, env_ptr);
 
-  SEXP classes = PROTECT(Rf_allocVector(STRSXP, 2));
-  SET_STRING_ELT(classes, 0, Rf_mkChar("hook_env"));
-  SET_STRING_ELT(classes, 1, Rf_mkChar("UserDefinedDatabase"));
-  Rf_setAttrib(env, Rf_install("class"), classes);
+  SET_ATTRIB(env, R_UserDefinedDatabaseAttrs);
+  SET_OBJECT(env, 1);
 
-  UNPROTECT(3);
+  UNPROTECT(2);
   return env;
 }
